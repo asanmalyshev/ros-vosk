@@ -1,1 +1,6 @@
 vosk
+sounddevice
+bs4
+lxml
+websockets
+pyyaml
