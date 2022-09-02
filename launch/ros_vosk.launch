@@ -1,11 +1,12 @@
 <launch>
   <arg name="models_path" default="$(find ros_vosk)/models/"/>
   <arg name="use_tts_engine" default="false"/>
+  <arg name="vosk_param" default="$(find ros_vosk)/cfg/params.yaml"/>
 
   <group ns="vosk">
     <node name="vosk_engine" pkg="ros_vosk" type="vosk_node.py" respawn="true" output="screen" ns="speech_recognition">
         <param name="models_path" value="$(arg models_path)"/>
-        <rosparam file="$(find ros_vosk)/cfg/params.yaml" param="vosk_param" command="load" subst_value="true"/>
+        <rosparam file="$(arg vosk_param)" param="vosk_param" command="load" subst_value="true"/>
     </node>
     <node name="tts_engine" pkg="ros_vosk" type="tts_engine.py" respawn="true" output="screen" if="$(arg use_tts_engine)"/>
   </group>
